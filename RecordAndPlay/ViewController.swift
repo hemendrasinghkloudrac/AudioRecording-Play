@@ -26,7 +26,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.btnPlay.enabled = false
-        self.listRecordings()
+        listRecordings()
         //print(recordings.count)
     }
     
@@ -148,11 +148,6 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
             print("something went wrong")
         } 
     }
-    
-    func recording() {
-    
-    
-    }
-
+  
 }
 
