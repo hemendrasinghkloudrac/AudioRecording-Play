@@ -16,13 +16,14 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
     var getFileName: [NSURL] = []
     var audioRecording: AVAudioRecorder!
     var audioFilePlayer: AVAudioPlayer!
-    var fileArr = NSArray()
+    //var fileArr = NSArray()
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Recordings"
         self.fileNameTblView.rowHeight = 55
         // Do any additional setup after loading the view.
         //print(self.getFileName.count)
-        fileArr = getFileName
+        //fileArr = getFileName
         
     }
     
@@ -37,7 +38,7 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> RecordingFileNameCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recordingFileCellIdentifier", forIndexPath: indexPath) as! RecordingFileNameCell
-        cell.recordedFileName!.text = String(getFileName[indexPath.row].lastPathComponent)
+            cell.recordedFileName!.text = getFileName[indexPath.row].lastPathComponent
         return cell
         
     }

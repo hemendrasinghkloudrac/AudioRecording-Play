@@ -15,6 +15,8 @@
 		68F5DE2D1CCF40630084BC0F /* RecordAndPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F5DE2C1CCF40630084BC0F /* RecordAndPlayTests.swift */; };
 		732A825C1D929680006AFB90 /* RecordingListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A825B1D929680006AFB90 /* RecordingListVC.swift */; };
 		732A825E1D92975C006AFB90 /* RecordingFileNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A825D1D92975C006AFB90 /* RecordingFileNameCell.swift */; };
+		733623B01D93FFA000C7ABA6 /* StopButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 733623AF1D93FFA000C7ABA6 /* StopButton@2x.png */; };
+		733623B21D93FFA800C7ABA6 /* PlayButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 733623B11D93FFA800C7ABA6 /* PlayButton@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		68F5DE2E1CCF40630084BC0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		732A825B1D929680006AFB90 /* RecordingListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingListVC.swift; sourceTree = "<group>"; };
 		732A825D1D92975C006AFB90 /* RecordingFileNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingFileNameCell.swift; sourceTree = "<group>"; };
+		733623AF1D93FFA000C7ABA6 /* StopButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StopButton@2x.png"; sourceTree = "<group>"; };
+		733623B11D93FFA800C7ABA6 /* PlayButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayButton@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 				68F5DE191CCF40630084BC0F /* ViewController.swift */,
 				68F5DE1B1CCF40630084BC0F /* Main.storyboard */,
 				68F5DE1E1CCF40630084BC0F /* Assets.xcassets */,
+				733623B11D93FFA800C7ABA6 /* PlayButton@2x.png */,
+				733623AF1D93FFA000C7ABA6 /* StopButton@2x.png */,
 				68F5DE201CCF40630084BC0F /* LaunchScreen.storyboard */,
 				68F5DE231CCF40630084BC0F /* Info.plist */,
 				732A825D1D92975C006AFB90 /* RecordingFileNameCell.swift */,
@@ -186,6 +192,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				733623B21D93FFA800C7ABA6 /* PlayButton@2x.png in Resources */,
+				733623B01D93FFA000C7ABA6 /* StopButton@2x.png in Resources */,
 				68F5DE221CCF40630084BC0F /* LaunchScreen.storyboard in Resources */,
 				68F5DE1F1CCF40630084BC0F /* Assets.xcassets in Resources */,
 				68F5DE1D1CCF40630084BC0F /* Main.storyboard in Resources */,
