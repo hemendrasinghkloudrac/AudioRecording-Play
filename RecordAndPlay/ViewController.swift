@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-
+var recordings: [NSURL] = []
 class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDelegate {
     
     @IBOutlet weak var btnPlay: UIButton!
@@ -21,7 +21,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     var audioRecorder:AVAudioRecorder!
     var audioPlayer : AVAudioPlayer!
     let isRecorderAudioFile = false
-    var recordings: [NSURL] = []
+    //var recordings: [NSURL] = []
     let recordSettings = [AVSampleRateKey : NSNumber(float: Float(44100.0)),
                           AVFormatIDKey : NSNumber(int: Int32(kAudioFormatMPEG4AAC)),
                           AVNumberOfChannelsKey : NSNumber(int: 1),
@@ -58,7 +58,8 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     
     @IBAction func doRecording(sender: AnyObject) {
         timeTimer?.invalidate()
-        if sender.titleLabel!!.text == "Record" {
+        if sender.titleLabel!!.text == "rec" {
+        //if self.audioRecorder .recording {
             let audioSession = AVAudioSession.sharedInstance()
             do {
                 try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
@@ -68,7 +69,8 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
             } catch {
             }
             do {
-                self.btnRecord.setTitle("Stop", forState: UIControlState.Normal)
+                self.btnRecord.setTitle(" ", forState: UIControlState.Normal)
+                 self.btnRecord.setImage(UIImage(named: "stopImg.png"), forState: .Normal)
                 self.btnPlay.enabled = false
                 try audioSession.setActive(true)
                 
@@ -86,14 +88,36 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
             audioRecorder.stop()
             let audioSession = AVAudioSession.sharedInstance()
             do {
-                self.btnRecord.setTitle("Record", forState: UIControlState.Normal)
+                self.btnRecord.setTitle("rec", forState: UIControlState.Normal)
+                self.btnRecord.setImage(UIImage(named: "recordImg.png"), forState: .Normal)
                 self.btnPlay.enabled = true
                 try audioSession.setActive(false)
             } catch {
             }
         }
+       /* timeTimer?.invalidate()
         
-    }
+        if audioRecorder.recording {
+            audioRecorder.stop()
+        } else {
+            miliSeconds = 0 
+            timerLabel.text = "00:00:00"
+            timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.updateTimerLabel(_:)), userInfo: nil, repeats: true)
+            //audioRecorder.deleteRecording()
+            audioRecorder.record()
+            self.listRecordings()
+        }
+        self.updateBtnControls()*/
+        //self.updateBtnControls()
+      }
+    
+    
+    /*func stopRecording(sender: AnyObject) {
+        if audioRecorder.recording {
+            doRecording(sender)
+        }
+    }*/
+    
     @IBAction func doPlay(sender: AnyObject) {
         if !audioRecorder.recording {
             self.audioPlayer = try! AVAudioPlayer(contentsOfURL: audioRecorder.url)
@@ -109,11 +133,11 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     // show list of recorded files
     
     
-     func showRecordedList() {
+    func showRecordedList() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("recordingListVCIdentifier") as! RecordingListVC
-        vc.getFileName = self.recordings
+        //vc.getFileName = recordings
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -127,12 +151,10 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     //MARK:- AVAudioPlayerDelegate
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
         print(true)
-        //print(self.recordings.count)
-        //print(self.recordings[0])
-        
-        
-        
-    }
+        //self.audioPlayer = nil
+        //self.updateBtnControls()
+       }
+    
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer, error: NSError?){
         print(error.debugDescription)
     }
@@ -160,7 +182,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
         let documentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         do {
             let urls = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(documentsDirectory, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles)
-            self.recordings = urls.filter( { (name: NSURL) -> Bool in
+            recordings = urls.filter( { (name: NSURL) -> Bool in
                 return name.lastPathComponent!.hasSuffix("m4a")
             })
             
@@ -180,5 +202,23 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
         
     }
     
+    /*func updateBtnControls() {
+        UIView.animateWithDuration(0.2) { () -> Void in
+            self.btnRecord.transform = self.audioRecorder.recording ? CGAffineTransformMakeScale(0.5, 0.5) : CGAffineTransformMakeScale(1, 1)
+        }
+        if let _ = audioPlayer {
+            btnPlay.setImage(UIImage(named: "StopButton"), forState: .Normal)
+            btnRecord.enabled = false
+            //recordButtonContainer.alpha = 0.25
+        } else {
+            btnPlay.setImage(UIImage(named: "PlayButton"), forState: .Normal)
+            btnRecord.enabled = true
+            //recordButtonContainer.alpha = 1
+        }
+        btnPlay.enabled = !audioRecorder.recording
+        btnPlay.alpha = audioRecorder.recording ? 0.25 : 1
+        //saveButton.enabled = !recorder.recording
+    }*/
+ 
 }
 

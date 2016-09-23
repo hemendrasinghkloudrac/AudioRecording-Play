@@ -13,16 +13,18 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
     
     
     @IBOutlet weak var fileNameTblView: UITableView!
-    var getFileName: [NSURL] = []
+    //var getFileName: [NSURL] = []
     var audioRecording: AVAudioRecorder!
     var audioFilePlayer: AVAudioPlayer!
+    var deleteFileAtIndexPath: NSIndexPath? = nil
     //var fileArr = NSArray()
+    //var vcObj = ViewController()
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Recordings"
         self.fileNameTblView.rowHeight = 55
         // Do any additional setup after loading the view.
-        //print(self.getFileName.count)
+        print(recordings.count)
         //fileArr = getFileName
         
     }
@@ -32,26 +34,88 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //return self.recordings.count
-        return self.getFileName.count
+        return recordings.count
+        //return self.getFileName.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> RecordingFileNameCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recordingFileCellIdentifier", forIndexPath: indexPath) as! RecordingFileNameCell
-            cell.recordedFileName!.text = getFileName[indexPath.row].lastPathComponent
+        cell.recordedFileName!.text = recordings[indexPath.row].lastPathComponent
         return cell
         
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            let fileURL = getFileName[indexPath.row]
-            //print(fileURL)
-            self.audioFilePlayer = try! AVAudioPlayer(contentsOfURL: fileURL)
-            self.audioFilePlayer.prepareToPlay()
-            self.audioFilePlayer.delegate = self
-            self.audioFilePlayer.play()
-       }
+        let fileURL = recordings[indexPath.row]
+        //print(fileURL)
+        self.audioFilePlayer = try! AVAudioPlayer(contentsOfURL: fileURL)
+        self.audioFilePlayer.prepareToPlay()
+        self.audioFilePlayer.delegate = self
+        self.audioFilePlayer.play()
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            deleteFileAtIndexPath = indexPath
+            let fileURLToDelete = recordings[indexPath.row]
+            confirmDelete(fileURLToDelete)
+        }
+    }
+    
+    func confirmDelete(fileURL: NSURL) {
+        let alert = UIAlertController(title: "Delete Planet", message: "Are you sure to permanently delete \(fileURL)?", preferredStyle: .ActionSheet)
+        let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: removeFile)
+        let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler:cancle)
+        
+        alert.addAction(DeleteAction)
+        alert.addAction(CancelAction)
+        
+        // Support display in iPad
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.sourceRect = CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 
+    /*func DeleteFile(alertAction: UIAlertAction!) -> Void {
+        if let indexPath = deleteFileAtIndexPath {
+            //tableView.beginUpdates()
+            
+           recordings.removeAtIndex(indexPath.row)
+           fileNameTblView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                deleteFileAtIndexPath = nil
+            
+            
+            //tableView.endUpdates()
+        }
+    }*/
+    
+    func cancle(alertAction: UIAlertAction!) -> Void {
+    
+    
+    }
+    
+    func removeFile(alertAction: UIAlertAction ) -> Void {
+        if let indexPath = deleteFileAtIndexPath {
+         let filePath = recordings[indexPath.row].relativePath
+            print(filePath)
+            if NSFileManager.defaultManager().fileExistsAtPath(filePath!){
+                do {
+                    try NSFileManager.defaultManager().removeItemAtPath(filePath!)
+                    //fileNameTblView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                     //recordings.removeAtIndex(indexPath.row)
+                    
+                    deleteFileAtIndexPath = nil
+                    recordings.removeAtIndex(indexPath.row)
+                    print("old image has been removed")
+                    fileNameTblView.reloadData()
+                } catch {
+                    print("an error during a removing")
+                }
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

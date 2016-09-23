@@ -20,26 +20,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzF-iX-r8X">
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Record">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="doRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QN4-WE-HAP"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxN-N3-45m">
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Play">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="doPlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yhT-3Z-UwW"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6Z-ZU-Rgk">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="qwH-GU-0M5"/>
@@ -47,20 +27,49 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJs-IB-XPI">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxN-N3-45m">
+                                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="PlayButton.png">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doPlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yhT-3Z-UwW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzF-iX-r8X">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="2te-S8-aby"/>
+                                            <constraint firstAttribute="height" constant="50" id="VQN-lv-F7b"/>
+                                        </constraints>
+                                        <state key="normal" title="rec" image="recordImg.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QN4-WE-HAP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="AxN-N3-45m" firstAttribute="height" secondItem="pzF-iX-r8X" secondAttribute="height" id="3Ml-v1-K4i"/>
+                                    <constraint firstItem="pzF-iX-r8X" firstAttribute="leading" secondItem="iJs-IB-XPI" secondAttribute="leading" constant="14" id="Hmt-w5-p0G"/>
+                                    <constraint firstAttribute="width" constant="160" id="LP9-Ln-Hve"/>
+                                    <constraint firstItem="AxN-N3-45m" firstAttribute="leading" secondItem="pzF-iX-r8X" secondAttribute="trailing" constant="31" id="V5m-Wd-gO9"/>
+                                    <constraint firstItem="AxN-N3-45m" firstAttribute="centerY" secondItem="pzF-iX-r8X" secondAttribute="centerY" id="Yao-qP-IyW"/>
+                                    <constraint firstAttribute="height" constant="62" id="asQ-e5-rQ3"/>
+                                    <constraint firstItem="pzF-iX-r8X" firstAttribute="centerY" secondItem="iJs-IB-XPI" secondAttribute="centerY" id="hrl-73-TlA"/>
+                                    <constraint firstItem="AxN-N3-45m" firstAttribute="width" secondItem="pzF-iX-r8X" secondAttribute="width" id="tin-dP-Raq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="iJs-IB-XPI" firstAttribute="centerX" secondItem="Y6Z-ZU-Rgk" secondAttribute="centerX" id="0UR-Rx-v07"/>
                             <constraint firstItem="Y6Z-ZU-Rgk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0nz-E9-eeV"/>
-                            <constraint firstItem="AxN-N3-45m" firstAttribute="width" secondItem="pzF-iX-r8X" secondAttribute="width" id="6w6-5V-pPB"/>
-                            <constraint firstItem="pzF-iX-r8X" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GSN-gk-paj"/>
-                            <constraint firstItem="AxN-N3-45m" firstAttribute="height" secondItem="pzF-iX-r8X" secondAttribute="height" id="JBM-YD-S1B"/>
-                            <constraint firstItem="pzF-iX-r8X" firstAttribute="top" secondItem="Y6Z-ZU-Rgk" secondAttribute="bottom" constant="22" id="Lei-5L-Of6"/>
-                            <constraint firstItem="AxN-N3-45m" firstAttribute="top" secondItem="pzF-iX-r8X" secondAttribute="bottom" constant="23" id="Mbr-CE-nfZ"/>
-                            <constraint firstItem="pzF-iX-r8X" firstAttribute="width" secondItem="Y6Z-ZU-Rgk" secondAttribute="width" id="Rly-Qk-hMt"/>
-                            <constraint firstItem="AxN-N3-45m" firstAttribute="centerX" secondItem="pzF-iX-r8X" secondAttribute="centerX" id="bCb-GE-eBK"/>
+                            <constraint firstItem="iJs-IB-XPI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mJf-Mv-6se"/>
                             <constraint firstItem="Y6Z-ZU-Rgk" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.535" id="q5V-82-urH"/>
-                            <constraint firstItem="pzF-iX-r8X" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.075" id="r6z-2L-uDy"/>
-                            <constraint firstItem="pzF-iX-r8X" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="y8X-zN-aO4"/>
+                            <constraint firstItem="iJs-IB-XPI" firstAttribute="top" secondItem="Y6Z-ZU-Rgk" secondAttribute="bottom" constant="15.5" id="rED-73-HVe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="29N-UU-3ie"/>
@@ -72,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="927.20000000000005" y="-151.57421289355324"/>
+            <point key="canvasLocation" x="1320.8" y="-116.49175412293854"/>
         </scene>
         <!--Recording ListVC-->
         <scene sceneID="DFa-AI-Lvo">
@@ -93,7 +102,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u4g-ip-VEi" id="M25-9O-4pR">
-                                            <frame key="frameInset" width="308" height="62"/>
+                                            <frame key="frameInset" width="308" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8v0-Lq-VXp">
@@ -155,7 +164,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MXW-xu-FA9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12" y="-151.57421289355324"/>
+            <point key="canvasLocation" x="430" y="-203"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="PlayButton.png" width="126" height="126"/>
+        <image name="recordImg.png" width="128" height="128"/>
+    </resources>
 </document>
