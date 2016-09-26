@@ -13,12 +13,16 @@
 		68F5DE1F1CCF40630084BC0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68F5DE1E1CCF40630084BC0F /* Assets.xcassets */; };
 		68F5DE221CCF40630084BC0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68F5DE201CCF40630084BC0F /* LaunchScreen.storyboard */; };
 		68F5DE2D1CCF40630084BC0F /* RecordAndPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F5DE2C1CCF40630084BC0F /* RecordAndPlayTests.swift */; };
+		73029E181D9558AC004608BE /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 73029E171D9558AC004608BE /* playIcon.png */; };
+		73029E1A1D955915004608BE /* playIcon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 73029E191D955915004608BE /* playIcon1.png */; };
 		732A825C1D929680006AFB90 /* RecordingListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A825B1D929680006AFB90 /* RecordingListVC.swift */; };
 		732A825E1D92975C006AFB90 /* RecordingFileNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A825D1D92975C006AFB90 /* RecordingFileNameCell.swift */; };
 		733623B01D93FFA000C7ABA6 /* StopButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 733623AF1D93FFA000C7ABA6 /* StopButton@2x.png */; };
 		733623B21D93FFA800C7ABA6 /* PlayButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 733623B11D93FFA800C7ABA6 /* PlayButton@2x.png */; };
 		73789C061D9516900008DA2F /* stopImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 73789C051D9516900008DA2F /* stopImg.png */; };
 		73789C081D9516990008DA2F /* recordImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 73789C071D9516990008DA2F /* recordImg.png */; };
+		73CBB7A41D990440006BD2A9 /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CBB7A31D990440006BD2A9 /* pauseButton.png */; };
+		73CBB7A61D990706006BD2A9 /* resumeImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CBB7A51D990706006BD2A9 /* resumeImg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,12 +46,16 @@
 		68F5DE281CCF40630084BC0F /* RecordAndPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecordAndPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F5DE2C1CCF40630084BC0F /* RecordAndPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAndPlayTests.swift; sourceTree = "<group>"; };
 		68F5DE2E1CCF40630084BC0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73029E171D9558AC004608BE /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
+		73029E191D955915004608BE /* playIcon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon1.png; sourceTree = "<group>"; };
 		732A825B1D929680006AFB90 /* RecordingListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingListVC.swift; sourceTree = "<group>"; };
 		732A825D1D92975C006AFB90 /* RecordingFileNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingFileNameCell.swift; sourceTree = "<group>"; };
 		733623AF1D93FFA000C7ABA6 /* StopButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StopButton@2x.png"; sourceTree = "<group>"; };
 		733623B11D93FFA800C7ABA6 /* PlayButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayButton@2x.png"; sourceTree = "<group>"; };
 		73789C051D9516900008DA2F /* stopImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stopImg.png; sourceTree = "<group>"; };
 		73789C071D9516990008DA2F /* recordImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recordImg.png; sourceTree = "<group>"; };
+		73CBB7A31D990440006BD2A9 /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
+		73CBB7A51D990706006BD2A9 /* resumeImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resumeImg.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +103,11 @@
 				68F5DE1B1CCF40630084BC0F /* Main.storyboard */,
 				68F5DE1E1CCF40630084BC0F /* Assets.xcassets */,
 				733623B11D93FFA800C7ABA6 /* PlayButton@2x.png */,
+				73029E171D9558AC004608BE /* playIcon.png */,
 				733623AF1D93FFA000C7ABA6 /* StopButton@2x.png */,
+				73CBB7A51D990706006BD2A9 /* resumeImg.png */,
+				73029E191D955915004608BE /* playIcon1.png */,
+				73CBB7A31D990440006BD2A9 /* pauseButton.png */,
 				73789C051D9516900008DA2F /* stopImg.png */,
 				73789C071D9516990008DA2F /* recordImg.png */,
 				68F5DE201CCF40630084BC0F /* LaunchScreen.storyboard */,
@@ -201,9 +213,13 @@
 				733623B21D93FFA800C7ABA6 /* PlayButton@2x.png in Resources */,
 				73789C061D9516900008DA2F /* stopImg.png in Resources */,
 				733623B01D93FFA000C7ABA6 /* StopButton@2x.png in Resources */,
+				73CBB7A61D990706006BD2A9 /* resumeImg.png in Resources */,
 				68F5DE221CCF40630084BC0F /* LaunchScreen.storyboard in Resources */,
 				73789C081D9516990008DA2F /* recordImg.png in Resources */,
+				73029E1A1D955915004608BE /* playIcon1.png in Resources */,
+				73CBB7A41D990440006BD2A9 /* pauseButton.png in Resources */,
 				68F5DE1F1CCF40630084BC0F /* Assets.xcassets in Resources */,
+				73029E181D9558AC004608BE /* playIcon.png in Resources */,
 				68F5DE1D1CCF40630084BC0F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

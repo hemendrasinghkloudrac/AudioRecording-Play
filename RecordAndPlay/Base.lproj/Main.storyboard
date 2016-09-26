@@ -29,15 +29,6 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJs-IB-XPI">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxN-N3-45m">
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="PlayButton.png">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="doPlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yhT-3Z-UwW"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzF-iX-r8X">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="2te-S8-aby"/>
@@ -50,32 +41,86 @@
                                             <action selector="doRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QN4-WE-HAP"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8Q-24-qiu">
+                                        <state key="normal" image="pauseButton.png"/>
+                                        <connections>
+                                            <action selector="PauseRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q6E-J8-f02"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="AxN-N3-45m" firstAttribute="height" secondItem="pzF-iX-r8X" secondAttribute="height" id="3Ml-v1-K4i"/>
                                     <constraint firstItem="pzF-iX-r8X" firstAttribute="leading" secondItem="iJs-IB-XPI" secondAttribute="leading" constant="14" id="Hmt-w5-p0G"/>
                                     <constraint firstAttribute="width" constant="160" id="LP9-Ln-Hve"/>
-                                    <constraint firstItem="AxN-N3-45m" firstAttribute="leading" secondItem="pzF-iX-r8X" secondAttribute="trailing" constant="31" id="V5m-Wd-gO9"/>
-                                    <constraint firstItem="AxN-N3-45m" firstAttribute="centerY" secondItem="pzF-iX-r8X" secondAttribute="centerY" id="Yao-qP-IyW"/>
+                                    <constraint firstItem="b8Q-24-qiu" firstAttribute="centerY" secondItem="pzF-iX-r8X" secondAttribute="centerY" id="SD0-Gn-ps2"/>
                                     <constraint firstAttribute="height" constant="62" id="asQ-e5-rQ3"/>
+                                    <constraint firstItem="b8Q-24-qiu" firstAttribute="height" secondItem="pzF-iX-r8X" secondAttribute="height" id="gx7-R6-EHC"/>
                                     <constraint firstItem="pzF-iX-r8X" firstAttribute="centerY" secondItem="iJs-IB-XPI" secondAttribute="centerY" id="hrl-73-TlA"/>
-                                    <constraint firstItem="AxN-N3-45m" firstAttribute="width" secondItem="pzF-iX-r8X" secondAttribute="width" id="tin-dP-Raq"/>
+                                    <constraint firstItem="b8Q-24-qiu" firstAttribute="width" secondItem="pzF-iX-r8X" secondAttribute="width" id="pLS-KQ-GWH"/>
+                                    <constraint firstAttribute="trailing" secondItem="b8Q-24-qiu" secondAttribute="trailing" constant="8" id="s5o-IA-zr6"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4t7-xr-VUx">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="wf4-2Y-dy6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxN-N3-45m">
+                                <state key="normal" image="playIcon1.png">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="doPlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yhT-3Z-UwW"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttm-WU-Jqf">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="uXO-0z-bg6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4m-6O-XWr">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="iJs-IB-XPI" firstAttribute="centerX" secondItem="Y6Z-ZU-Rgk" secondAttribute="centerX" id="0UR-Rx-v07"/>
                             <constraint firstItem="Y6Z-ZU-Rgk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0nz-E9-eeV"/>
+                            <constraint firstItem="AxN-N3-45m" firstAttribute="width" secondItem="pzF-iX-r8X" secondAttribute="width" id="2xe-VO-auH"/>
+                            <constraint firstItem="Ttm-WU-Jqf" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.21" id="9Xt-vp-xAn"/>
+                            <constraint firstItem="K4m-6O-XWr" firstAttribute="width" secondItem="Ttm-WU-Jqf" secondAttribute="width" id="DXZ-tb-Z1c"/>
+                            <constraint firstItem="AxN-N3-45m" firstAttribute="height" secondItem="pzF-iX-r8X" secondAttribute="height" id="GYk-An-atx"/>
+                            <constraint firstItem="Ttm-WU-Jqf" firstAttribute="centerX" secondItem="b8Q-24-qiu" secondAttribute="centerX" id="Grc-f1-uR7"/>
+                            <constraint firstItem="AxN-N3-45m" firstAttribute="centerX" secondItem="iJs-IB-XPI" secondAttribute="centerX" id="Isx-gV-FN7"/>
+                            <constraint firstItem="Ttm-WU-Jqf" firstAttribute="centerY" secondItem="4t7-xr-VUx" secondAttribute="centerY" id="O3B-f8-PwH"/>
+                            <constraint firstItem="K4m-6O-XWr" firstAttribute="centerX" secondItem="AxN-N3-45m" secondAttribute="centerX" id="Xzy-u5-QMu"/>
+                            <constraint firstItem="K4m-6O-XWr" firstAttribute="height" secondItem="Ttm-WU-Jqf" secondAttribute="height" id="cKL-Na-YhH"/>
+                            <constraint firstItem="4t7-xr-VUx" firstAttribute="centerX" secondItem="pzF-iX-r8X" secondAttribute="centerX" id="cUx-RD-Ben"/>
+                            <constraint firstItem="4t7-xr-VUx" firstAttribute="height" secondItem="Ttm-WU-Jqf" secondAttribute="height" id="cmi-QP-nys"/>
+                            <constraint firstItem="4t7-xr-VUx" firstAttribute="top" secondItem="pzF-iX-r8X" secondAttribute="bottom" constant="2" id="hdz-Kc-UfW"/>
+                            <constraint firstItem="K4m-6O-XWr" firstAttribute="top" secondItem="AxN-N3-45m" secondAttribute="bottom" constant="8" id="iM5-Rf-QxU"/>
                             <constraint firstItem="iJs-IB-XPI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mJf-Mv-6se"/>
+                            <constraint firstItem="AxN-N3-45m" firstAttribute="top" secondItem="Ttm-WU-Jqf" secondAttribute="bottom" constant="15" id="pVE-zr-d2t"/>
                             <constraint firstItem="Y6Z-ZU-Rgk" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.535" id="q5V-82-urH"/>
                             <constraint firstItem="iJs-IB-XPI" firstAttribute="top" secondItem="Y6Z-ZU-Rgk" secondAttribute="bottom" constant="15.5" id="rED-73-HVe"/>
+                            <constraint firstItem="4t7-xr-VUx" firstAttribute="width" secondItem="Ttm-WU-Jqf" secondAttribute="width" id="wAe-a8-LiI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="29N-UU-3ie"/>
                     <connections>
                         <outlet property="btnPlay" destination="AxN-N3-45m" id="0Rc-Vo-5hh"/>
                         <outlet property="btnRecord" destination="pzF-iX-r8X" id="6Eh-7x-AM0"/>
+                        <outlet property="pauseBtn" destination="b8Q-24-qiu" id="EGu-DZ-ElO"/>
+                        <outlet property="pauseBtnLabel" destination="Ttm-WU-Jqf" id="kov-Xj-neg"/>
+                        <outlet property="playBtnLabel" destination="K4m-6O-XWr" id="MnR-KU-xk3"/>
+                        <outlet property="recordBtnLabel" destination="4t7-xr-VUx" id="p15-r7-kcB"/>
                         <outlet property="timerLabel" destination="Y6Z-ZU-Rgk" id="zu9-Pt-BNe"/>
                     </connections>
                 </viewController>
@@ -168,7 +213,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PlayButton.png" width="126" height="126"/>
+        <image name="pauseButton.png" width="48" height="48"/>
+        <image name="playIcon1.png" width="48" height="48"/>
         <image name="recordImg.png" width="128" height="128"/>
     </resources>
 </document>

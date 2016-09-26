@@ -15,6 +15,11 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var btnRecord: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var pauseBtn: UIButton!
+    @IBOutlet weak var recordBtnLabel: UILabel!
+    @IBOutlet weak var playBtnLabel: UILabel!
+    @IBOutlet weak var pauseBtnLabel: UILabel!
+    
     var timeTimer: NSTimer?
     var miliSeconds: Int = 0
     
@@ -30,18 +35,22 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.btnPlay.enabled = false
+        self.pauseBtn.enabled = false
+        recordBtnLabel.text = "Record"
+        playBtnLabel.hidden = true
+        pauseBtnLabel.hidden = true
         //view.backgroundColor = blackColor()
         listRecordings()
         title = ""
         let nav = self.navigationController?.navigationBar
-        //nav!.barTintColor = UIColor.blackColor()
         nav!.barTintColor = UIColor.init(colorLiteralRed: 78.0/255, green: 158.0/255, blue: 255.0/255, alpha: 1.0)
         nav!.tintColor = UIColor.whiteColor()
         nav!
             .titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         let viewRecordingList: UIBarButtonItem = UIBarButtonItem(title: "View list",style: .Plain, target: self, action: #selector(self.showRecordedList))
         self.navigationItem.setRightBarButtonItem(viewRecordingList, animated: true)
-        
+        let saveRecordedFile: UIBarButtonItem = UIBarButtonItem(title: "Save" , style: .Plain, target: self , action: #selector(self.saveAction))
+        self.navigationItem.setLeftBarButtonItem(saveRecordedFile, animated: true)
     }
     
     //MARK:- Method store sound in Directory.
@@ -50,8 +59,8 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
         let fileManager = NSFileManager.defaultManager()
         let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         let documentDirectory = urls[0] as NSURL
-        //let soundURL = documentDirectory.URLByAppendingPathComponent("sound.m4a")
-        let soundURL =  documentDirectory.URLByAppendingPathComponent(NSUUID().UUIDString + ".m4a")
+        let soundURL = documentDirectory.URLByAppendingPathComponent("sound.m4b")
+        //let soundURL =  documentDirectory.URLByAppendingPathComponent(NSUUID().UUIDString + ".m4a")
         print(soundURL)
         return soundURL
     }
@@ -59,19 +68,25 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     @IBAction func doRecording(sender: AnyObject) {
         timeTimer?.invalidate()
         if sender.titleLabel!!.text == "rec" {
-        //if self.audioRecorder .recording {
-            let audioSession = AVAudioSession.sharedInstance()
+            //if self.audioRecorder .recording {
+            
+          let audioSession = AVAudioSession.sharedInstance()
             do {
                 try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-                try audioRecorder = AVAudioRecorder(URL: self.directoryURL()!,
-                                                    settings: recordSettings)
+                try audioRecorder = AVAudioRecorder(URL: self.directoryURL()!,settings: recordSettings)
                 audioRecorder.prepareToRecord()
             } catch {
             }
             do {
                 self.btnRecord.setTitle(" ", forState: UIControlState.Normal)
-                 self.btnRecord.setImage(UIImage(named: "stopImg.png"), forState: .Normal)
+                self.btnRecord.setImage(UIImage(named: "stopImg.png"), forState: .Normal)
+                self.pauseBtn.setImage(UIImage(named: "pauseButton.png"), forState: .Normal)
+                self.recordBtnLabel.text = "Stop"
                 self.btnPlay.enabled = false
+                self.playBtnLabel.hidden = true
+                self.pauseBtn.enabled = true
+                self.pauseBtnLabel.hidden = false
+                self.pauseBtnLabel.text = "Pause"
                 try audioSession.setActive(true)
                 
                 //
@@ -89,34 +104,40 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
             let audioSession = AVAudioSession.sharedInstance()
             do {
                 self.btnRecord.setTitle("rec", forState: UIControlState.Normal)
+                self.pauseBtn.setImage(UIImage(named: "pauseButton.png"), forState: .Normal)
                 self.btnRecord.setImage(UIImage(named: "recordImg.png"), forState: .Normal)
+                self.recordBtnLabel.text = "Record"
                 self.btnPlay.enabled = true
+                self.playBtnLabel.hidden = false
+                self.playBtnLabel.text = "Play"
+                self.pauseBtn.enabled = false
+                self.pauseBtnLabel.hidden = true
                 try audioSession.setActive(false)
             } catch {
             }
         }
-       /* timeTimer?.invalidate()
-        
-        if audioRecorder.recording {
-            audioRecorder.stop()
-        } else {
-            miliSeconds = 0 
-            timerLabel.text = "00:00:00"
-            timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.updateTimerLabel(_:)), userInfo: nil, repeats: true)
-            //audioRecorder.deleteRecording()
-            audioRecorder.record()
-            self.listRecordings()
-        }
-        self.updateBtnControls()*/
+        /* timeTimer?.invalidate()
+         
+         if audioRecorder.recording {
+         audioRecorder.stop()
+         } else {
+         miliSeconds = 0
+         timerLabel.text = "00:00:00"
+         timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.updateTimerLabel(_:)), userInfo: nil, repeats: true)
+         //audioRecorder.deleteRecording()
+         audioRecorder.record()
+         self.listRecordings()
+         }
+         self.updateBtnControls()*/
         //self.updateBtnControls()
-      }
+    }
     
     
     /*func stopRecording(sender: AnyObject) {
-        if audioRecorder.recording {
-            doRecording(sender)
-        }
-    }*/
+     if audioRecorder.recording {
+     doRecording(sender)
+     }
+     }*/
     
     @IBAction func doPlay(sender: AnyObject) {
         if !audioRecorder.recording {
@@ -153,7 +174,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
         print(true)
         //self.audioPlayer = nil
         //self.updateBtnControls()
-       }
+    }
     
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer, error: NSError?){
         print(error.debugDescription)
@@ -203,22 +224,55 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     }
     
     /*func updateBtnControls() {
-        UIView.animateWithDuration(0.2) { () -> Void in
-            self.btnRecord.transform = self.audioRecorder.recording ? CGAffineTransformMakeScale(0.5, 0.5) : CGAffineTransformMakeScale(1, 1)
+     UIView.animateWithDuration(0.2) { () -> Void in
+     self.btnRecord.transform = self.audioRecorder.recording ? CGAffineTransformMakeScale(0.5, 0.5) : CGAffineTransformMakeScale(1, 1)
+     }
+     if let _ = audioPlayer {
+     btnPlay.setImage(UIImage(named: "StopButton"), forState: .Normal)
+     btnRecord.enabled = false
+     //recordButtonContainer.alpha = 0.25
+     } else {
+     btnPlay.setImage(UIImage(named: "PlayButton"), forState: .Normal)
+     btnRecord.enabled = true
+     //recordButtonContainer.alpha = 1
+     }
+     btnPlay.enabled = !audioRecorder.recording
+     btnPlay.alpha = audioRecorder.recording ? 0.25 : 1
+     //saveButton.enabled = !recorder.recording
+     }*/
+    
+    @IBAction func PauseRecording(sender: AnyObject) {
+        timeTimer?.invalidate()
+        if audioRecorder.recording {
+            self.audioRecorder.pause()
+            self.pauseBtn.setImage(UIImage(named: "resumeImg.png"), forState: .Normal)
+            self.pauseBtnLabel.text = "Resume"
+        } else{
+            self.audioRecorder.record()
+            self.pauseBtnLabel.text = "Pause"
+            self.pauseBtn.setImage(UIImage(named: "pauseButton.png"), forState: .Normal)
+            timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.updateTimerLabel(_:)), userInfo: nil, repeats: true)
         }
-        if let _ = audioPlayer {
-            btnPlay.setImage(UIImage(named: "StopButton"), forState: .Normal)
-            btnRecord.enabled = false
-            //recordButtonContainer.alpha = 0.25
-        } else {
-            btnPlay.setImage(UIImage(named: "PlayButton"), forState: .Normal)
-            btnRecord.enabled = true
-            //recordButtonContainer.alpha = 1
+    }
+    
+    func saveAction() {
+        //let audioSession = AVAudioSession.sharedInstance()
+        do {
+            //try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try audioRecorder = AVAudioRecorder(URL: self.directoryURL2()!,settings: recordSettings)
+            self.listRecordings()
+        } catch {
         }
-        btnPlay.enabled = !audioRecorder.recording
-        btnPlay.alpha = audioRecorder.recording ? 0.25 : 1
-        //saveButton.enabled = !recorder.recording
-    }*/
- 
+    }
+    
+    func directoryURL2() -> NSURL? {
+        let fileManager = NSFileManager.defaultManager()
+        let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let documentDirectory = urls[0] as NSURL
+        //let soundURL = documentDirectory.URLByAppendingPathComponent("sound.m4a")
+        let soundURL =  documentDirectory.URLByAppendingPathComponent(NSUUID().UUIDString + ".m4a")
+        print(soundURL)
+        return soundURL
+    }
 }
 

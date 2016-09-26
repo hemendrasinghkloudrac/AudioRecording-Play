@@ -63,7 +63,7 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
     }
     
     func confirmDelete(fileURL: NSURL) {
-        let alert = UIAlertController(title: "Delete Planet", message: "Are you sure to permanently delete \(fileURL)?", preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: "Delete audio", message: "Are you sure to permanently delete \(fileURL)?", preferredStyle: .ActionSheet)
         let DeleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: removeFile)
         let CancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler:cancle)
         
@@ -77,18 +77,6 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
         self.presentViewController(alert, animated: true, completion: nil)
     }
 
-    /*func DeleteFile(alertAction: UIAlertAction!) -> Void {
-        if let indexPath = deleteFileAtIndexPath {
-            //tableView.beginUpdates()
-            
-           recordings.removeAtIndex(indexPath.row)
-           fileNameTblView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                deleteFileAtIndexPath = nil
-            
-            
-            //tableView.endUpdates()
-        }
-    }*/
     
     func cancle(alertAction: UIAlertAction!) -> Void {
     
@@ -102,23 +90,17 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
             if NSFileManager.defaultManager().fileExistsAtPath(filePath!){
                 do {
                     try NSFileManager.defaultManager().removeItemAtPath(filePath!)
-                    //fileNameTblView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                     //recordings.removeAtIndex(indexPath.row)
-                    
                     deleteFileAtIndexPath = nil
                     recordings.removeAtIndex(indexPath.row)
-                    print("old image has been removed")
+                    print("Old File has been removed")
                     fileNameTblView.reloadData()
                 } catch {
-                    print("an error during a removing")
+                    print("An error during a removing")
                 }
             }
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
     
 }
