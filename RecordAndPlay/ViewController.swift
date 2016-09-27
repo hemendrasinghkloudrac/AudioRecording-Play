@@ -40,7 +40,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
         playBtnLabel.hidden = true
         pauseBtnLabel.hidden = true
         //view.backgroundColor = blackColor()
-        listRecordings()
+       // listRecordings()
         title = ""
         let nav = self.navigationController?.navigationBar
         nav!.barTintColor = UIColor.init(colorLiteralRed: 78.0/255, green: 158.0/255, blue: 255.0/255, alpha: 1.0)
@@ -96,7 +96,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
                 //
                 
                 audioRecorder.record()
-                self.listRecordings()
+               // self.listRecordings()
             } catch {
             }
         }else{
@@ -146,7 +146,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
             self.audioPlayer.delegate = self
             self.audioPlayer.play()
             //
-            self.listRecordings()
+           // self.listRecordings()
             //
         }
     }
@@ -256,11 +256,19 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
     }
     
     func saveAction() {
-        //let audioSession = AVAudioSession.sharedInstance()
         do {
-            //try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try audioRecorder = AVAudioRecorder(URL: self.directoryURL2()!,settings: recordSettings)
-            self.listRecordings()
+        
+            self.directoryURL()!
+            do {
+                let documentDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
+                let originPath = documentDirectory.URLByAppendingPathComponent("sound.m4b")
+                let destinationPath =  documentDirectory.URLByAppendingPathComponent(NSUUID().UUIDString + ".m4a")
+                try NSFileManager.defaultManager().moveItemAtURL(originPath, toURL: destinationPath)
+            } catch let error as NSError {
+                print(error)
+            }
+            
+            
         } catch {
         }
     }
