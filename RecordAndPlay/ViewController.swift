@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDelegate {
+class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDelegate {
     
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var btnRecord: UIButton!
@@ -83,7 +83,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
                 audioRecorder.record()
             } catch {
             }
-        }else{
+        } else {
             audioRecorder.stop()
             let audioSession = AVAudioSession.sharedInstance()
             do {
@@ -169,6 +169,9 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
             let destinationPath =  documentDirectory.URLByAppendingPathComponent(NSUUID().UUIDString + ".m4a")
             try NSFileManager.defaultManager().moveItemAtURL(originPath!, toURL: destinationPath!)
             print(destinationPath)
+            self.playBtnLabel.hidden = true
+            self.btnPlay.enabled = false
+            self.timerLabel.text = "00:00:00"
         } catch let error as NSError {
             print(error)
         }
@@ -184,6 +187,5 @@ class ViewController: UIViewController,AVAudioRecorderDelegate ,AVAudioPlayerDel
         }))
         self.presentViewController(refreshAlert, animated: true, completion: nil)
     }
-    
 }
 

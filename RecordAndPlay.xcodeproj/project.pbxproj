@@ -97,9 +97,9 @@
 		68F5DE161CCF40630084BC0F /* RecordAndPlay */ = {
 			isa = PBXGroup;
 			children = (
-				732A825B1D929680006AFB90 /* RecordingListVC.swift */,
 				68F5DE171CCF40630084BC0F /* AppDelegate.swift */,
 				68F5DE191CCF40630084BC0F /* ViewController.swift */,
+				732A825B1D929680006AFB90 /* RecordingListVC.swift */,
 				68F5DE1B1CCF40630084BC0F /* Main.storyboard */,
 				68F5DE1E1CCF40630084BC0F /* Assets.xcassets */,
 				733623B11D93FFA800C7ABA6 /* PlayButton@2x.png */,

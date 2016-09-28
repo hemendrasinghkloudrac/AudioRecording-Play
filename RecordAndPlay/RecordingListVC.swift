@@ -4,7 +4,6 @@
 //
 //  Created by HemendraSingh on 21/09/16.
 //  Copyright © 2016 Nimble Chapps. All rights reserved.
-//
 
 import UIKit
 import AVFoundation
@@ -16,14 +15,13 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
     var audioRecording: AVAudioRecorder!
     var audioFilePlayer: AVAudioPlayer!
     var deleteFileAtIndexPath: NSIndexPath? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Recordings"
-        self.fileNameTblView.rowHeight = 55
+        fileNameTblView.rowHeight = 55
         listRecordings()
-        print(recordings.count)
         fileNameTblView.reloadData()
-        
     }
     
     func listRecordings() {
@@ -33,7 +31,6 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
             recordings = urls.filter( { (name: NSURL) -> Bool in
                 return name.lastPathComponent!.hasSuffix("m4a")
             })
-            
         } catch let error as NSError {
             print(error.localizedDescription)
         } catch {
@@ -91,18 +88,18 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
     
     func cancle(alertAction: UIAlertAction!) -> Void {
         
-        
     }
     
     func removeFile(alertAction: UIAlertAction ) -> Void {
         if let indexPath = deleteFileAtIndexPath {
             let filePath = recordings[indexPath.row].relativePath
             print(filePath)
-            if NSFileManager.defaultManager().fileExistsAtPath(filePath!){
+            if NSFileManager.defaultManager().fileExistsAtPath(filePath!) {
                 do {
                     try NSFileManager.defaultManager().removeItemAtPath(filePath!)
                     deleteFileAtIndexPath = nil
                     recordings.removeAtIndex(indexPath.row)
+                    fileNameTblView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
                     print("Old File has been removed")
                     fileNameTblView.reloadData()
                 } catch {
