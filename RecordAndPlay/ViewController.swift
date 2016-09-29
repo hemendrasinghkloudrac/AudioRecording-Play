@@ -42,8 +42,8 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
             .titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         let viewRecordingList: UIBarButtonItem = UIBarButtonItem(title: "View list",style: .Plain, target: self, action: #selector(self.showRecordedList))
         self.navigationItem.setRightBarButtonItem(viewRecordingList, animated: true)
-        let saveRecordedFile: UIBarButtonItem = UIBarButtonItem(title: "Save" , style: .Plain, target: self , action: #selector(self.saveAlert))
-        self.navigationItem.setLeftBarButtonItem(saveRecordedFile, animated: true)
+//        let saveRecordedFile: UIBarButtonItem = UIBarButtonItem(title: "Save" , style: .Plain, target: self , action: #selector(self.saveAlert))
+//        self.navigationItem.setLeftBarButtonItem(saveRecordedFile, animated: true)
     }
     
     //MARK:- Method store audio recording file in Directory.
@@ -77,13 +77,14 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
                 self.pauseBtnLabel.hidden = false
                 self.pauseBtnLabel.text = "Pause"
                 try audioSession.setActive(true)
+                self.navigationItem.leftBarButtonItem = nil
                 miliSeconds = 0
                 timerLabel.text = "00:00:00"
                 timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.updateTimerLabel(_:)), userInfo: nil, repeats: true)
                 audioRecorder.record()
-            } catch {
+            }catch {
             }
-        } else {
+        }else {
             audioRecorder.stop()
             let audioSession = AVAudioSession.sharedInstance()
             do {
@@ -96,19 +97,30 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
                 self.playBtnLabel.text = "Play"
                 self.pauseBtn.enabled = false
                 self.pauseBtnLabel.hidden = true
+                let saveRecordedFile: UIBarButtonItem = UIBarButtonItem(title: "Save" , style: .Plain, target: self , action: #selector(self.saveAlert))
+                self.navigationItem.setLeftBarButtonItem(saveRecordedFile, animated: true)
                 try audioSession.setActive(false)
-            } catch {
+            }catch {
             }
         }
     }
     
     @IBAction func doPlay(sender: AnyObject) {
-        if !audioRecorder.recording {
+        if !audioPlayer.playing {
+            self.btnRecord.enabled = false
+            self.recordBtnLabel.hidden = true
+            self.playBtnLabel.text = "Stop Playing"
+            self.btnPlay.setImage(UIImage(named: "pauseBtn.png"), forState: .Normal)
             self.audioPlayer = try! AVAudioPlayer(contentsOfURL: audioRecorder.url)
             self.audioPlayer.prepareToPlay()
             self.audioPlayer.volume = 50.0
             self.audioPlayer.delegate = self
+            self.navigationItem.leftBarButtonItem = nil
             self.audioPlayer.play()
+        }else {
+            self.audioPlayer.stop()
+            self.btnPlay.setImage(UIImage(named: "playIcon1.png"), forState: .Normal)
+            self.playBtnLabel.text = "Play"
         }
     }
     
@@ -126,6 +138,12 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
     
     //MARK:- AVAudioPlayerDelegate
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+        let saveRecordedFile: UIBarButtonItem = UIBarButtonItem(title: "Save" , style: .Plain, target: self , action: #selector(self.saveAlert))
+        self.navigationItem.setLeftBarButtonItem(saveRecordedFile, animated: true)
+        self.btnRecord.enabled = true
+        self.recordBtnLabel.hidden = false
+        self.btnPlay.setImage(UIImage(named: "playIcon1.png"), forState: .Normal)
+        self.playBtnLabel.text = "Play"
         print(true)
     }
     
@@ -154,7 +172,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
             self.audioRecorder.pause()
             self.pauseBtn.setImage(UIImage(named: "resumeImg.png"), forState: .Normal)
             self.pauseBtnLabel.text = "Resume"
-        } else {
+        }else {
             self.audioRecorder.record()
             self.pauseBtnLabel.text = "Pause"
             self.pauseBtn.setImage(UIImage(named: "pauseButton.png"), forState: .Normal)
@@ -168,11 +186,12 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
             let originPath = documentDirectory.URLByAppendingPathComponent("sound.m4b")
             let destinationPath =  documentDirectory.URLByAppendingPathComponent(NSUUID().UUIDString + ".m4a")
             try NSFileManager.defaultManager().moveItemAtURL(originPath!, toURL: destinationPath!)
-            print(destinationPath)
+            print(originPath)
             self.playBtnLabel.hidden = true
             self.btnPlay.enabled = false
             self.timerLabel.text = "00:00:00"
-        } catch let error as NSError {
+            self.navigationItem.leftBarButtonItem = nil
+        }catch let error as NSError {
             print(error)
         }
     }

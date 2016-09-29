@@ -39,12 +39,10 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return recordings.count
     }
     
@@ -103,7 +101,7 @@ class RecordingListVC: UIViewController,UITableViewDelegate,AVAudioPlayerDelegat
                     print("Old File has been removed")
                     fileNameTblView.reloadData()
                 } catch {
-                    print("An error during a file removing")
+                    print("An error occured during file removing")
                 }
             }
         }
