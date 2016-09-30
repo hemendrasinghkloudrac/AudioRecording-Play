@@ -20,6 +20,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
     @IBOutlet weak var pauseBtnLabel: UILabel!
     var timeTimer: NSTimer?
     var miliSeconds: Int = 0
+    var countMilliSec: Int = 0
     var audioRecorder:AVAudioRecorder!
     var audioPlayer : AVAudioPlayer!
     let isRecorderAudioFile = false
@@ -42,8 +43,6 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
             .titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         let viewRecordingList: UIBarButtonItem = UIBarButtonItem(title: "View list",style: .Plain, target: self, action: #selector(self.showRecordedList))
         self.navigationItem.setRightBarButtonItem(viewRecordingList, animated: true)
-//        let saveRecordedFile: UIBarButtonItem = UIBarButtonItem(title: "Save" , style: .Plain, target: self , action: #selector(self.saveAlert))
-//        self.navigationItem.setLeftBarButtonItem(saveRecordedFile, animated: true)
     }
     
     //MARK:- Method store audio recording file in Directory.
@@ -79,8 +78,9 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
                 try audioSession.setActive(true)
                 self.navigationItem.leftBarButtonItem = nil
                 miliSeconds = 0
+                countMilliSec = 0
                 timerLabel.text = "00:00:00"
-                timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.updateTimerLabel(_:)), userInfo: nil, repeats: true)
+                timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.increaseTimer(_:)), userInfo: nil, repeats: true)
                 audioRecorder.record()
             }catch {
             }
@@ -97,8 +97,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
                 self.playBtnLabel.text = "Play"
                 self.pauseBtn.enabled = false
                 self.pauseBtnLabel.hidden = true
-                let saveRecordedFile: UIBarButtonItem = UIBarButtonItem(title: "Save" , style: .Plain, target: self , action: #selector(self.saveAlert))
-                self.navigationItem.setLeftBarButtonItem(saveRecordedFile, animated: true)
+                self.setLeftBarButtonItem()
                 try audioSession.setActive(false)
             }catch {
             }
@@ -106,7 +105,8 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
     }
     
     @IBAction func doPlay(sender: AnyObject) {
-        if !audioPlayer.playing {
+        timeTimer?.invalidate()
+        if (audioPlayer == nil) {
             self.btnRecord.enabled = false
             self.recordBtnLabel.hidden = true
             self.playBtnLabel.text = "Stop Playing"
@@ -116,11 +116,21 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
             self.audioPlayer.volume = 50.0
             self.audioPlayer.delegate = self
             self.navigationItem.leftBarButtonItem = nil
+            miliSeconds = countMilliSec
+            timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.decreaseTimer(_:)), userInfo: nil, repeats: true)
             self.audioPlayer.play()
         }else {
             self.audioPlayer.stop()
             self.btnPlay.setImage(UIImage(named: "playIcon1.png"), forState: .Normal)
+            self.setLeftBarButtonItem()
+            let milli = (countMilliSec % 60) + 39
+            let sec = (countMilliSec / 60) % 60
+            let min = countMilliSec / 3600
+            timerLabel.text = NSString(format: "%02d:%02d:%02d", min, sec, milli) as String
             self.playBtnLabel.text = "Play"
+            self.btnRecord.enabled = true
+            self.recordBtnLabel.hidden = false
+            self.audioPlayer = nil
         }
     }
     
@@ -138,13 +148,17 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
     
     //MARK:- AVAudioPlayerDelegate
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
-        let saveRecordedFile: UIBarButtonItem = UIBarButtonItem(title: "Save" , style: .Plain, target: self , action: #selector(self.saveAlert))
-        self.navigationItem.setLeftBarButtonItem(saveRecordedFile, animated: true)
+        self.setLeftBarButtonItem()
         self.btnRecord.enabled = true
         self.recordBtnLabel.hidden = false
         self.btnPlay.setImage(UIImage(named: "playIcon1.png"), forState: .Normal)
         self.playBtnLabel.text = "Play"
-        print(true)
+        self.audioPlayer = nil
+        self.timeTimer?.invalidate()
+        let milli = (countMilliSec % 60) + 39
+        let sec = (countMilliSec / 60) % 60
+        let min = countMilliSec / 3600
+        timerLabel.text = NSString(format: "%02d:%02d:%02d", min, sec, milli) as String
     }
     
     func audioPlayerDecodeErrorDidOccur(player: AVAudioPlayer, error: NSError?){
@@ -158,8 +172,17 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
         super.didReceiveMemoryWarning()
     }
     
-    func updateTimerLabel(timer: NSTimer) {
+    func increaseTimer(timer: NSTimer) {
         miliSeconds += 1
+        let milli = (miliSeconds % 60) + 39
+        let sec = (miliSeconds / 60) % 60
+        let min = miliSeconds / 3600
+        timerLabel.text = NSString(format: "%02d:%02d:%02d", min, sec, milli) as String
+        countMilliSec += 1
+    }
+    
+    func decreaseTimer(timer: NSTimer) {
+        miliSeconds -= 1
         let milli = (miliSeconds % 60) + 39
         let sec = (miliSeconds / 60) % 60
         let min = miliSeconds / 3600
@@ -176,7 +199,7 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
             self.audioRecorder.record()
             self.pauseBtnLabel.text = "Pause"
             self.pauseBtn.setImage(UIImage(named: "pauseButton.png"), forState: .Normal)
-            timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.updateTimerLabel(_:)), userInfo: nil, repeats: true)
+            timeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0167, target: self, selector: #selector(self.increaseTimer(_:)), userInfo: nil, repeats: true)
         }
     }
     
@@ -206,5 +229,9 @@ class ViewController: UIViewController,AVAudioRecorderDelegate,AVAudioPlayerDele
         }))
         self.presentViewController(refreshAlert, animated: true, completion: nil)
     }
+    
+    func setLeftBarButtonItem() {
+        let saveRecordedFile: UIBarButtonItem = UIBarButtonItem(title: "Save" , style: .Plain, target: self , action: #selector(self.saveAlert))
+        self.navigationItem.setLeftBarButtonItem(saveRecordedFile, animated: true)
+    }
 }
-

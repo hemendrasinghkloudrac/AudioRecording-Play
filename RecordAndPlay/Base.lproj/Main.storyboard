@@ -34,7 +34,7 @@
                                             <constraint firstAttribute="width" constant="50" id="2te-S8-aby"/>
                                             <constraint firstAttribute="height" constant="50" id="VQN-lv-F7b"/>
                                         </constraints>
-                                        <state key="normal" title="rec" image="recordImg.png">
+                                        <state key="normal" title="rec" image="recordImg">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -42,7 +42,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8Q-24-qiu">
-                                        <state key="normal" image="pauseButton.png"/>
+                                        <state key="normal" image="pauseButton"/>
                                         <connections>
                                             <action selector="PauseRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q6E-J8-f02"/>
                                         </connections>
@@ -68,7 +68,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxN-N3-45m">
-                                <state key="normal" image="playIcon1.png">
+                                <state key="normal" image="playIcon1">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -95,7 +95,7 @@
                             <constraint firstItem="Y6Z-ZU-Rgk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0nz-E9-eeV"/>
                             <constraint firstItem="AxN-N3-45m" firstAttribute="width" secondItem="pzF-iX-r8X" secondAttribute="width" id="2xe-VO-auH"/>
                             <constraint firstItem="Ttm-WU-Jqf" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.21" id="9Xt-vp-xAn"/>
-                            <constraint firstItem="K4m-6O-XWr" firstAttribute="width" secondItem="Ttm-WU-Jqf" secondAttribute="width" id="DXZ-tb-Z1c"/>
+                            <constraint firstItem="K4m-6O-XWr" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.485" id="GFT-Bc-r0r"/>
                             <constraint firstItem="AxN-N3-45m" firstAttribute="height" secondItem="pzF-iX-r8X" secondAttribute="height" id="GYk-An-atx"/>
                             <constraint firstItem="Ttm-WU-Jqf" firstAttribute="centerX" secondItem="b8Q-24-qiu" secondAttribute="centerX" id="Grc-f1-uR7"/>
                             <constraint firstItem="AxN-N3-45m" firstAttribute="centerX" secondItem="iJs-IB-XPI" secondAttribute="centerX" id="Isx-gV-FN7"/>
@@ -213,8 +213,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pauseButton.png" width="48" height="48"/>
-        <image name="playIcon1.png" width="48" height="48"/>
-        <image name="recordImg.png" width="128" height="128"/>
+        <image name="pauseButton" width="48" height="48"/>
+        <image name="playIcon1" width="48" height="48"/>
+        <image name="recordImg" width="128" height="128"/>
     </resources>
 </document>
